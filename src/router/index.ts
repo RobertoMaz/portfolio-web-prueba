@@ -5,17 +5,22 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/features/home/components/HomeView.vue'),
+    component: () => import('@/features/home/views/HomePage.vue'),
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import('@/features/about/components/AboutView.vue'),
+    component: () => import('@/features/about/views/AboutPage.vue'),
   },
   {
     path: '/contact',
     name: 'contact',
-    component: () => import('@/features/contact/components/ContactView.vue'),
+    component: () => import('@/features/contact/views/ContactPage.vue'),
+  },
+  // Catch-all: redirect unknown routes to home
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/',
   },
 ]
 
