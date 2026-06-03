@@ -9,15 +9,29 @@ export default [
   ...pluginVue.configs['flat/recommended'],
   prettierConfig,
   {
-    files: ['**/*.ts', '**/*.tsx', '**/*.vue'],
+    files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
-      parser: {
-        parseForESLint: (code, options) => {
-          // Vue files are handled by eslint-plugin-vue parser
-          return require('@typescript-eslint/parser').parseForESLint(code, options)
-        },
-      },
+      parser: tsParser,
       parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tsEslint,
+    },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      'no-console': 'warn',
+      'no-debugger': 'error',
+    },
+  },
+  {
+    files: ['**/*.vue'],
+    languageOptions: {
+      parserOptions: {
+        parser: tsParser,
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
